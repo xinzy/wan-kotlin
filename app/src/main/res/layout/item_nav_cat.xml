@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.NavigationNavViewModel" />
+        <import type="com.xinzy.kotlin.wan.entity.Navigation" />
+        <variable
+            name="item"
+            type="Navigation" />
+        <variable
+            name="viewModel"
+            type="NavigationNavViewModel" />
+        <variable
+            name="position"
+            type="int" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="@{viewModel.isItemSelected(position) ? 0xFFFF8447 : 0xFF666666}"
+            android:text="@{item.name}"/>
+    </LinearLayout>
+</layout>

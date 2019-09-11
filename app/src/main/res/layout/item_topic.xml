@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="com.xinzy.kotlin.wan.entity.Topic" />
+
+        <variable
+            name="item"
+            type="Topic" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.xinzy.mvvm.lib.kotlin.view.widget.IconFontView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/icon_author"
+                    android:textSize="14sp"
+                    android:textColor="#2C4F6C" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.author}"
+                    android:textSize="12sp"
+                    android:textColor="#2C4F6C"
+                    tools:text="来源" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.category}"
+                    android:textSize="12sp"
+                    android:textColor="#FF8447"
+                    tools:text="分类" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="16sp"
+                android:textColor="#2C4F6C"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.displayTitle}"
+                tools:text="标题" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <com.xinzy.mvvm.lib.kotlin.view.widget.IconFontView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/icon_new"
+                    android:textSize="12sp"
+                    android:textColor="#EB3223"
+                    app:isVisible="@{item.fresh}"/>
+
+                <com.xinzy.mvvm.lib.kotlin.view.widget.IconFontView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/icon_top"
+                    android:textSize="12sp"
+                    android:textColor="#EB3223"
+                    app:isVisible="@{item.top}"/>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.xinzy.mvvm.lib.kotlin.view.widget.TagGroup
+                        android:id="@+id/itemTags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/TagGroup.Small"
+                        app:tags="@{item.tagTexts}"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.niceDate}"
+                    android:layout_marginStart="12dp"
+                    android:textSize="12sp"
+                    android:textColor="#2D4A66"
+                    tools:text="日期" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

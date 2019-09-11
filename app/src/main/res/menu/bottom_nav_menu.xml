@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_navigation_main"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_chapter"
+        android:icon="@drawable/ic_navigation_chapter"
+        android:title="@string/title_chapter" />
+
+    <item
+        android:id="@+id/navigation_weixin"
+        android:icon="@drawable/ic_navigation_weixin"
+        android:title="@string/title_weixin" />
+
+    <item
+        android:id="@+id/navigation_project"
+        android:icon="@drawable/ic_navigation_project"
+        android:title="@string/title_project" />
+
+    <item
+        android:id="@+id/navigation_nav"
+        android:icon="@drawable/ic_navigation_nav"
+        android:title="@string/title_nav" />
+</menu>

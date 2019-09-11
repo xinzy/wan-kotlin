@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.xinzy.mvvm.lib.kotlin.view.binding.adapter.LayoutManagers" />
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.ProjectViewModel" />
+        <variable
+            name="viewModel"
+            type="ProjectViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isRefreshing="@{viewModel.isRefreshing}"
+            app:onRefreshAction="@{viewModel::refresh}">
+
+            <com.xinzy.kotlin.wan.widget.StatusLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:status="@{viewModel.displayStatus}"
+                app:onRetryAction="@{viewModel::refresh}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:adapter="@{viewModel.projectAdapter}"
+                    app:onScrollToEndAction="@{viewModel::onNextPage}"
+                    app:onItemClickListener="@{viewModel::onItemTopicClick}"/>
+            </com.xinzy.kotlin.wan.widget.StatusLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</layout>

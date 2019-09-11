@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.xinzy.kotlin.wan.entity.Chapter" />
+        <variable
+            name="item"
+            type="Chapter" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@color/white">
+
+            <com.xinzy.mvvm.lib.kotlin.view.widget.IconFontView
+                android:id="@+id/arrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:textColor="#2C4F6C"
+                android:text="@string/icon_arrow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toStartOf="@id/arrow">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="16sp"
+                    android:textColor="#2C4F6C"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:ellipsize="middle"
+                    android:text="@{item.name}"
+                    tools:text="标题" />
+
+                <com.xinzy.mvvm.lib.kotlin.view.widget.TagGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    app:borderStrokeWidth="0dp"
+                    app:borderColor="#0000"
+                    app:pressedBackgroundColor="#0000"
+                    app:textColor="#2C4F6C"
+                    app:textSize="12sp"
+                    app:tags="@{item.childrenNames}"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</layout>

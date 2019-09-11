@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="java.util.List" />
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.NavigationHomeViewModel" />
+        <import type="com.xinzy.kotlin.wan.entity.Banner" />
+
+        <variable
+            name="item"
+            type="List" />
+        <variable
+            name="viewModel"
+            type="NavigationHomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:orientation="vertical">
+
+        <com.xinzy.mvvm.lib.kotlin.view.widget.BannerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:data="@{item}"
+            app:layoutId="@{@layout/item_banner_item}"
+            app:onItemClickListener="@{viewModel::onBannerItemClick}"/>
+    </LinearLayout>
+</layout>

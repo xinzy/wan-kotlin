@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">mvvm</string>
+
+    <string name="widget_add_tag">添加标签</string>
+</resources>

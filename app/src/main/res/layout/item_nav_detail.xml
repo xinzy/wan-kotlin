@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.NavigationNavViewModel" />
+        <import type="com.xinzy.mvvm.lib.kotlin.view.binding.adapter.LayoutManagers" />
+        <import type="com.xinzy.mvvm.lib.kotlin.view.widget.MultiAdapter" />
+        <import type="com.xinzy.kotlin.wan.entity.Navigation" />
+        <variable
+            name="item"
+            type="Navigation" />
+        <variable
+            name="viewModel"
+            type="NavigationNavViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#666"
+            android:text="@{item.name}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:nestedScrollingEnabled="false"
+            app:onItemClickListener="@{viewModel::onItemArticleClick}"
+            app:layoutManager="@{LayoutManagers.flexbox()}"
+            app:adapter="@{MultiAdapter.createAdapter(viewModel, @layout/item_nav_article)}"
+            app:data="@{item.articles}"/>
+    </LinearLayout>
+</layout>

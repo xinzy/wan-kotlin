@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api rootProject.ext.dependencies.appcompat
+    api rootProject.ext.dependencies.lifecycleExtensions
+
+    api rootProject.ext.dependencies.recyclerView
+    api rootProject.ext.dependencies.flexbox
+
+    api rootProject.ext.dependencies.kotlinLib
+    api rootProject.ext.dependencies.kotlinCore
+
+    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies.retrofitAdapter
+    api rootProject.ext.dependencies.retrofitConvert
+
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+
+    api rootProject.ext.dependencies.gson
+
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.glideOkHttpIntegration
+    api rootProject.ext.dependencies.glideAnnotations
+    kapt rootProject.ext.dependencies.glideCompiler
+
+    api rootProject.ext.dependencies.arouter
+    kapt rootProject.ext.dependencies.arouterAnnotationProcessor
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

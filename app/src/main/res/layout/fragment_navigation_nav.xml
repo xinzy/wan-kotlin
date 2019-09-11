@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.xinzy.mvvm.lib.kotlin.view.widget.MultiAdapter" />
+        <import type="com.xinzy.mvvm.lib.kotlin.view.binding.adapter.LayoutManagers" />
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.NavigationNavViewModel" />
+        <variable
+            name="viewModel"
+            type="NavigationNavViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                app:title="@string/title_nav"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/catRecyclerView"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                app:onItemClickListener="@{viewModel::onItemNavigationClick}"
+                app:layoutManager="@{LayoutManagers.linear()}"
+                app:adapter="@{viewModel.categoryAdapter}"
+                app:data="@{viewModel.navigations}"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0"
+                android:layout_toEndOf="@id/catRecyclerView"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/navigationRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/divider"
+                app:layoutManager="@{LayoutManagers.linear()}"
+                app:adapter="@{viewModel.itemAdapter}"
+                app:data="@{viewModel.navigations}" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

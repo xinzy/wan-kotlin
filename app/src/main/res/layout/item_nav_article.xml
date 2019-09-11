@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.xinzy.kotlin.wan.entity.Topic" />
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.NavigationNavViewModel" />
+        <variable
+            name="item"
+            type="Topic" />
+        <variable
+            name="viewModel"
+            type="NavigationNavViewModel" />
+    </data>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_tag"
+        android:textColor="#FF8447"
+        android:textSize="13sp"
+        android:text="@{item.title}"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"/>
+</layout>

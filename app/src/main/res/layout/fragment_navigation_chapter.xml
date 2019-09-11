@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.xinzy.mvvm.lib.kotlin.view.widget.MultiAdapter" />
+        <import type="com.xinzy.mvvm.lib.kotlin.view.binding.adapter.LayoutManagers" />
+        <import type="com.xinzy.kotlin.wan.biz.main.viewmodel.NavigationChapterViewModel" />
+        <variable
+            name="viewModel"
+            type="NavigationChapterViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                app:title="@string/title_chapter"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isRefreshing="@{viewModel.isRefreshing}"
+            app:onRefreshAction="@{viewModel::start}">
+
+            <com.xinzy.kotlin.wan.widget.StatusLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:status="@{viewModel.displayStatus}"
+                app:onRetryAction="@{viewModel::start}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="@{LayoutManagers.linear()}"
+                    app:adapter="@{MultiAdapter.createAdapter(viewModel, @layout/item_chapter)}"
+                    app:data="@{viewModel.chapterList}"
+                    app:onItemClickListener="@{viewModel::onItemChapterClick}"/>
+            </com.xinzy.kotlin.wan.widget.StatusLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</layout>

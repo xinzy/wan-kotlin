@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xinzy.mvvm.lib.kotlin">
+
+    <application>
+        <provider
+            android:name=".common.InitContentProvider"
+            android:authorities="com.xinzy.mvvm.lib.init"
+            android:enabled="true"
+            android:exported="true"></provider>
+    </application>
+
+</manifest>
