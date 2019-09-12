@@ -34,7 +34,9 @@ class NavigationNavViewModel(application: Application) : BaseViewModel<Navigatio
 
     @SuppressLint("CheckResult")
     private fun start() {
+        showProgress()
         mModel!!.getNavigation().subscribe {
+            dismissProgress()
             navigations.set(it)
         }
     }

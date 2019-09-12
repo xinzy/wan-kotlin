@@ -80,4 +80,14 @@ open class WanApiModel : BaseModel() {
      */
     fun register(username: String, password: String, repassword: String): Observable<ApiResult<User>> =
             mApi.register(username, password, repassword).applyUI()
+
+    /**
+     * 退出登录
+     */
+    fun logout() = mApi.logout().applyUI()
+
+    /**
+     * 我的积分
+     */
+    fun coin(): Observable<ApiResult<Coin>> = mApi.coin().applyUI()
 }

@@ -1,18 +1,25 @@
 package com.xinzy.kotlin.wan.biz.main
 
 import android.os.Handler
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.os.postDelayed
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.xinzy.kotlin.wan.R
 import com.xinzy.kotlin.wan.biz.main.fragment.*
 import com.xinzy.kotlin.wan.biz.main.viewmodel.MainViewModel
 import com.xinzy.kotlin.wan.databinding.ActivityMainBinding
+import com.xinzy.kotlin.wan.databinding.NavHeaderMainBinding
 import com.xinzy.kotlin.wan.entity.User
 import com.xinzy.kotlin.wan.util.ROUTER_LOGIN
 import com.xinzy.kotlin.wan.util.ROUTER_MAIN
@@ -32,9 +39,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
     private var mSelectedFragment: Fragment? = null
 
+    private lateinit var mNavHeaderBinding: NavHeaderMainBinding
+
     override fun onViewDataBinding(dataBinding: ActivityMainBinding, viewModel: MainViewModel) {
         dataBinding.navView.setOnNavigationItemSelectedListener(this)
         dataBinding.navView.selectedItemId = R.id.navigation_home
+
+        mNavHeaderBinding = NavHeaderMainBinding.inflate(LayoutInflater.from(this), dataBinding.leftNavView, false)
+        mNavHeaderBinding.viewModel = viewModel
+        dataBinding.leftNavView.addHeaderView(mNavHeaderBinding.root)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mNavHeaderBinding.executePendingBindings()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -50,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     }
 
     fun onCheckUser(view: View) {
-//        if (User.me().isLogin()) return
+        if (User.me().isLogin()) return
 
         ARouter.getInstance().build(ROUTER_LOGIN).navigation(this)
         Handler().postDelayed(500) { mDataBinding.drawerLayout.closeDrawer(GravityCompat.START) }

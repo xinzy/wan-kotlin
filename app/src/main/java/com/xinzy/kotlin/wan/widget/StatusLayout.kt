@@ -8,7 +8,7 @@ import androidx.annotation.Keep
 import androidx.databinding.BindingAdapter
 import com.xinzy.mvvm.lib.kotlin.view.binding.BindingAction
 
-class StatusLayout : ViewFlipper, View.OnClickListener {
+class StatusLayout : ViewFlipper {
     private var mEmptyView: EmptyView = EmptyView(context)
     private var mErrorView: ErrorView = ErrorView(context)
 
@@ -21,18 +21,13 @@ class StatusLayout : ViewFlipper, View.OnClickListener {
         mOnRetryListener = l
     }
 
-    override fun onClick(v: View?) {
-        if (v == mErrorView) {
-            mOnRetryListener?.onRetry(this)
-        }
-    }
-
     override fun onFinishInflate() {
         super.onFinishInflate()
         check(childCount <= 1) { "StatusLayout must have only on child view" }
 
         addView(mEmptyView)
         addView(mErrorView)
+        mErrorView.setOnClickListener { mOnRetryListener?.onRetry(this) }
     }
 
     fun show(status: Status) {

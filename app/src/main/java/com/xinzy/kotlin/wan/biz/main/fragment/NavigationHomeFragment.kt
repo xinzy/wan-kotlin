@@ -7,4 +7,9 @@ import com.xinzy.mvvm.lib.kotlin.annotation.Layout
 import com.xinzy.mvvm.lib.kotlin.base.BaseFragment
 
 @Layout(R.layout.fragment_navigation_home)
-class NavigationHomeFragment : BaseFragment<FragmentNavigationHomeBinding, NavigationHomeViewModel>()
+class NavigationHomeFragment : BaseFragment<FragmentNavigationHomeBinding, NavigationHomeViewModel>() {
+
+    override fun onViewDataBinding(dataBinding: FragmentNavigationHomeBinding, viewModel: NavigationHomeViewModel) {
+
+    }
+}

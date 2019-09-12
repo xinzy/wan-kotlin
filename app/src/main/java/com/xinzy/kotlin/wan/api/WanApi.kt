@@ -83,4 +83,16 @@ interface WanApi {
     @FormUrlEncoded
     fun register(@Field("username") username: String, @Field("password") password: String,
                  @Field("repassword") repassword: String): Observable<ApiResult<User>>
+
+    /**
+     * 退出
+     */
+    @GET("/user/logout/json")
+    fun logout(): Observable<ApiResult<Any>>
+
+    /**
+     * 我的积分
+     */
+    @GET("/lg/coin/userinfo/json")
+    fun coin(): Observable<ApiResult<Coin>>
 }

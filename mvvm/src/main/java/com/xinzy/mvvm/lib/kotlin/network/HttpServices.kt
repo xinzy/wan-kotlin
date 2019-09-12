@@ -5,6 +5,7 @@ import com.xinzy.mvvm.lib.kotlin.annotation.BaseUri
 import com.xinzy.mvvm.lib.kotlin.annotation.HttpConfig
 import okhttp3.CookieJar
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,7 +21,7 @@ import kotlin.reflect.KClass
 
 private val mServices = ArrayMap<KClass<*>, Any>()
 
-fun <I> getRetrofitApi(clazz: KClass<*>): I {
+fun <I> getRetrofitApi(clazz: KClass<*>, converterFactory: Converter.Factory = GsonConverterFactory.create()): I {
     if (mServices.contains(clazz)) {
         return mServices[clazz] as I
     }
@@ -41,7 +42,7 @@ fun <I> getRetrofitApi(clazz: KClass<*>): I {
 
     val retrofit = Retrofit.Builder().baseUrl(uri.value)
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(converterFactory)
         .client(builder.build())
         .build()
 

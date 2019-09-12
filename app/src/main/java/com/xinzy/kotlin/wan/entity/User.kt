@@ -50,5 +50,16 @@ data class User(
         return this
     }
 
+    fun logout(context: Context) {
+        id = 0
+        username = ""
+        nickname = ""
+        icon = ""
+        type = 0
+        admin = false
+        token = ""
+        context.getSharedPreferences(SP_USER, Context.MODE_PRIVATE).edit { clear() }
+    }
+
     fun isLogin() = id > 0
 }

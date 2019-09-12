@@ -13,7 +13,11 @@ class NavigationProjectViewModel(application: Application) : BaseViewModel<WanAp
 
     @SuppressLint("CheckResult")
     private fun start() {
-        mModel!!.projectChapters().subscribe { chapters -> projectChapters.postValue(chapters)}
+        showProgress()
+        mModel!!.projectChapters().subscribe {
+            dismissProgress()
+            projectChapters.postValue(it)
+        }
     }
 
     override fun onCreate() {

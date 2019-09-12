@@ -16,6 +16,10 @@ class NavigationWeixinViewModel(application: Application) : BaseViewModel<WanApi
 
     @SuppressLint("CheckResult")
     private fun start() {
-        mModel!!.weixin().map { it.getData() }.subscribe { weixinListEvent.postValue(it) }
+        showProgress()
+        mModel!!.weixin().map { it.getData() }.subscribe {
+            dismissProgress()
+            weixinListEvent.postValue(it)
+        }
     }
 }
